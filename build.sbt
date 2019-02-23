@@ -10,7 +10,7 @@ libraryDependencies += guice
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0"
 
-libraryDependencies += "com.h2database" % "h2" % "1.4.197"
+libraryDependencies += "com.h2database" % "h2" % "1.4.198"
 
 libraryDependencies += specs2 % Test
 
