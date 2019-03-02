@@ -7,15 +7,8 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
-/**
-  * A repository for people.
-  *
-  * @param dbConfigProvider The Play db config provider. Play will inject this for you.
-  */
 @Singleton
-class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(
-  implicit ec:                                     ExecutionContext
-) {
+class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider) {
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
   import dbConfig._
@@ -31,7 +24,7 @@ class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(
 
     def name: Rep[String] = column[String]("name")
 
-    def age:Rep[Int] = column[Int]("age")
+    def age: Rep[Int] = column[Int]("age")
 
     def drivingLicenceNumber: Rep[Option[String]] =
       column[Option[String]]("driving_licence_number")
@@ -45,13 +38,6 @@ class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(
     */
   private val people = TableQuery[PeopleTable]
 
-  def get(name: String): Future[Option[Person]] =
+  def get(name: String)(implicit ec: ExecutionContext): Future[Option[Person]] =
     db.run(people.filter(_.name === name).result.headOption)
-
-  /**
-    * List all the people in the database.
-    */
-  def list(): Future[Seq[Person]] = db.run {
-    people.result
-  }
 }
