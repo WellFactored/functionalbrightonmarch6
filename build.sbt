@@ -6,13 +6,16 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.8"
 
-libraryDependencies += guice
-libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0"
-libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0"
-
-libraryDependencies += "com.h2database" % "h2" % "1.4.198"
-
-libraryDependencies += specs2 % Test
+libraryDependencies ++= Seq(
+  guice,
+  ws,
+  "com.typesafe.play" %% "play-slick"            % "4.0.0",
+  "com.typesafe.play" %% "play-slick-evolutions" % "4.0.0",
+  "org.typelevel"     %% "cats-core"             % "1.6.0",
+  "org.scalatest"     %% "scalatest"             % "3.0.5",
+  "com.h2database"    % "h2"                     % "1.4.198",
+  "org.scalamock"     %% "scalamock"             % "4.1.0" % "test"
+)
 
 scalacOptions ++= Seq(
   "-feature",
