@@ -4,3 +4,4 @@
 
 GET        /v1/person/:name        v1.controllers.PersonController.getPerson(name:String)
 GET        /v2/person/:name        v2.controllers.PersonController.getPerson(name:String)
+GET        /v3/person/:name        v3.controllers.PersonController.getPerson(name:String)

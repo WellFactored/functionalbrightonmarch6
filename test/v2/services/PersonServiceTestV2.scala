@@ -8,7 +8,7 @@ import v2.repositories.PersonRepository
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
 
-class ProdPersonServiceTest extends WordSpecLike with Matchers with OptionValues with FutureAwaits with DefaultAwaitTimeout {
+class PersonServiceTestV2 extends WordSpecLike with Matchers with OptionValues with FutureAwaits with DefaultAwaitTimeout {
   val name     = "test-name"
   val dlNumber = "test-dl-number"
 
