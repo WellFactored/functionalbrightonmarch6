@@ -22,7 +22,7 @@ class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider) {
     /** The ID column, which is the primary key, and auto incremented */
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
 
-    def name: Rep[String] = column[String]("name")
+    def name: Rep[String] = column[String]("name", O.Unique)
 
     def age: Rep[Int] = column[Int]("age")
 
@@ -40,4 +40,15 @@ class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider) {
 
   def get(name: String)(implicit ec: ExecutionContext): Future[Option[Person]] =
     db.run(people.filter(_.name === name).result.headOption)
+
+  def create(name: String, age: Int, drivingLicenseNumber: Option[String])(implicit ec: ExecutionContext): Future[Person] =
+    db.run {
+      (people.map(p => (p.name, p.age, p.drivingLicenceNumber))
+        returning people.map(_.id)
+        into ((cols, id) => Person(id, cols._1, cols._2, cols._3))) += (name, age, drivingLicenseNumber)
+    }
+
+  def delete(id: Long)(implicit ec: ExecutionContext): Future[Unit] =
+    db.run(people.filter(_.id === id).delete).map(_ => ())
+
 }

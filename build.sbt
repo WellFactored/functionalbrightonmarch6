@@ -14,7 +14,6 @@ libraryDependencies ++= Seq(
   "org.typelevel"          %% "cats-core"             % "1.6.0",
   "org.scalatest"          %% "scalatest"             % "3.0.5",
   "com.h2database"         % "h2"                     % "1.4.198",
-  "org.scalamock"          %% "scalamock"             % "4.1.0" % "test",
   "org.scalatestplus.play" %% "scalatestplus-play"    % "3.1.2" % "test",
   "com.github.tomakehurst" % "wiremock-jre8"          % "2.21.0" % "test",
 )
