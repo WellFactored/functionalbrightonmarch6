@@ -2,5 +2,5 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
 GET        /v1/person/:name        v1.controllers.PersonController.getPerson(name:String)
+GET        /v2/person/:name        v2.controllers.PersonController.getPerson(name:String)

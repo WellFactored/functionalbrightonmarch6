@@ -8,7 +8,7 @@ import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.libs.ws.WSClient
 import play.api.test.{DefaultAwaitTimeout, FutureAwaits}
 
-trait BaseISpec
+trait BaseSpec
     extends WordSpecLike
     with Matchers
     with WsScalaTestClient

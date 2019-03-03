@@ -1,12 +1,18 @@
-package v1.services
+package v2.services
+import com.google.inject.ImplementedBy
 import javax.inject.Inject
 import models.{DrivingLicence, Person, PersonWithLicence}
-import v1.connectors.DVLAConnector
-import v1.repositories.PersonRepository
+import v2.connectors.DVLAConnector
+import v2.repositories.PersonRepository
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class PersonService @Inject()(personRepository: PersonRepository, dvlaConnector: DVLAConnector) {
+@ImplementedBy(classOf[ProdPersonService])
+trait PersonService {
+  def getPerson(name: String)(implicit ec: ExecutionContext): Future[Option[PersonWithLicence]]
+}
+
+class ProdPersonService @Inject()(personRepository: PersonRepository, dvlaConnector: DVLAConnector) extends PersonService {
   def getPerson(name: String)(implicit ec: ExecutionContext): Future[Option[PersonWithLicence]] =
     for {
       person         <- personRepository.get(name)

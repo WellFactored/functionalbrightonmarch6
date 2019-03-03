@@ -9,7 +9,7 @@ import v1.repositories.PersonRepository
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class PersonServiceTest extends BaseISpec with OptionValues {
+class PersonServiceTest extends BaseSpec with OptionValues {
 
   lazy val repo:    PersonRepository = app.injector.instanceOf[PersonRepository]
   lazy val service: PersonService    = app.injector.instanceOf[PersonService]
