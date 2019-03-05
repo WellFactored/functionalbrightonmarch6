@@ -1,5 +1,6 @@
-package v1.repositories
+package v2
 
+import com.google.inject.ImplementedBy
 import javax.inject.{Inject, Singleton}
 import models.Person
 import play.api.db.slick.DatabaseConfigProvider
@@ -7,8 +8,13 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
+@ImplementedBy(classOf[ProdPersonRepository])
+trait PersonRepository {
+  def get(name: String)(implicit ec: ExecutionContext): Future[Option[Person]]
+}
+
 @Singleton
-class PersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider) {
+class ProdPersonRepository @Inject()(dbConfigProvider: DatabaseConfigProvider) extends PersonRepository {
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
   import dbConfig._

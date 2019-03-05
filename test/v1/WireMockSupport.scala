@@ -1,4 +1,4 @@
-package v1.services
+package v1
 
 import java.net.URL
 

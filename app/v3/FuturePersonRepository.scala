@@ -1,4 +1,4 @@
-package v3.repositories
+package v3
 
 import javax.inject.{Inject, Singleton}
 import models.Person

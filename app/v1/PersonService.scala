@@ -1,8 +1,7 @@
-package v1.services
+package v1
+
 import javax.inject.Inject
 import models.{DrivingLicence, Person, PersonWithLicence}
-import v1.connectors.DVLAConnector
-import v1.repositories.PersonRepository
 
 import scala.concurrent.{ExecutionContext, Future}
 

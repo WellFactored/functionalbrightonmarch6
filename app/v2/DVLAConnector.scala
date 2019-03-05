@@ -1,4 +1,6 @@
-package v3.connectors
+package v2
+
+import com.google.inject.ImplementedBy
 import com.google.inject.name.Named
 import javax.inject.Inject
 import models.DrivingLicence
@@ -7,18 +9,17 @@ import play.api.libs.ws.WSClient
 
 import scala.concurrent.{ExecutionContext, Future}
 
-trait DVLAConnector[F[_]] {
-  def getLicence(drivingLicenceNumber: String): F[Option[DrivingLicence]]
+@ImplementedBy(classOf[ProdDVLAConnector])
+trait DVLAConnector {
+  def getLicence(drivingLicenceNumber: String)(implicit ec: ExecutionContext): Future[Option[DrivingLicence]]
 }
 
-class FutureDVLAConnector @Inject()(
+class ProdDVLAConnector @Inject()(
   wsClient:                     WSClient,
   @Named("dvla.host") dvlaHost: String,
   @Named("dvla.port") dvlaPort: Int
-)(
-  implicit ec: ExecutionContext
-) extends DVLAConnector[Future] {
-  def getLicence(drivingLicenceNumber: String): Future[Option[DrivingLicence]] =
+) extends DVLAConnector {
+  def getLicence(drivingLicenceNumber: String)(implicit ec: ExecutionContext): Future[Option[DrivingLicence]] =
     wsClient.url(s"http://$dvlaHost:$dvlaPort/licence/$drivingLicenceNumber").get.map { response =>
       response.status match {
         case 404 => None

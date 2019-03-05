@@ -1,4 +1,5 @@
-package v1.connectors
+package v1
+
 import com.google.inject.name.Named
 import javax.inject.Inject
 import models.DrivingLicence

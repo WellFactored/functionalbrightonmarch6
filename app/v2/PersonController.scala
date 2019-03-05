@@ -1,9 +1,8 @@
-package v2.controllers
+package v2
 
 import javax.inject._
 import play.api.libs.json.Json
 import play.api.mvc._
-import v2.services.PersonService
 
 import scala.concurrent.ExecutionContext
 

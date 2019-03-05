@@ -1,10 +1,8 @@
-package v3.services
+package v3
 
 import cats.Id
 import models.{DrivingLicence, Person}
 import org.scalatest.{Matchers, OptionValues, WordSpecLike}
-import v3.connectors.DVLAConnector
-import v3.repositories.PersonRepository
 
 class PersonServiceTestV3 extends WordSpecLike with Matchers with OptionValues {
   val name     = "test-name"

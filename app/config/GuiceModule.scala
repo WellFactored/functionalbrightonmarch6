@@ -2,9 +2,6 @@ package config
 import com.google.inject.name.Names.named
 import com.google.inject.{AbstractModule, TypeLiteral}
 import play.api.{Configuration, Environment}
-import v3.connectors.{DVLAConnector, FutureDVLAConnector}
-import v3.repositories.{FuturePersonRepository, PersonRepository}
-import v3.services.{FuturePersonService, PersonService}
 
 import scala.concurrent.Future
 
@@ -14,9 +11,9 @@ class GuiceModule(environment: Environment, configuration: Configuration) extend
     bindConfigString("dvla.host")
     bindConfigInt("dvla.port")
 
-    bind(new TypeLiteral[PersonService[Future]] {}).to(classOf[FuturePersonService])
-    bind(new TypeLiteral[DVLAConnector[Future]] {}).to(classOf[FutureDVLAConnector])
-    bind(new TypeLiteral[PersonRepository[Future]] {}).to(classOf[FuturePersonRepository])
+    bind(new TypeLiteral[v3.PersonService[Future]] {}).to(classOf[v3.FuturePersonService])
+    bind(new TypeLiteral[v3.DVLAConnector[Future]] {}).to(classOf[v3.FutureDVLAConnector])
+    bind(new TypeLiteral[v3.PersonRepository[Future]] {}).to(classOf[v3.FuturePersonRepository])
   }
 
   private def bindConfigString(path: String): Unit =

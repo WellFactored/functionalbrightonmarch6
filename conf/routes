@@ -2,6 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET        /v1/person/:name        v1.controllers.PersonController.getPerson(name:String)
-GET        /v2/person/:name        v2.controllers.PersonController.getPerson(name:String)
-GET        /v3/person/:name        v3.controllers.PersonController.getPerson(name:String)
+GET        /v1/person/:name        v1.PersonController.getPerson(name:String)
+GET        /v2/person/:name        v2.PersonController.getPerson(name:String)
+GET        /v3/person/:name        v3.PersonController.getPerson(name:String)

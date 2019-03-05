@@ -1,10 +1,10 @@
-package v1.services
+package v1
+
 import com.github.tomakehurst.wiremock.client.WireMock.{aResponse, get, urlPathEqualTo}
 import models.{DrivingLicence, PersonWithLicence}
 import org.scalatest.OptionValues
 import play.api.http.Status
 import play.api.libs.json.Json
-import v1.repositories.PersonRepository
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future

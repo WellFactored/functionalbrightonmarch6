@@ -1,14 +1,13 @@
-package v1.controllers
+package v3
 
 import javax.inject._
 import play.api.libs.json.Json
 import play.api.mvc._
-import v1.services.PersonService
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 
 class PersonController @Inject()(
-  service: PersonService,
+  service: PersonService[Future],
   cc:      MessagesControllerComponents
 )(
   implicit ec: ExecutionContext

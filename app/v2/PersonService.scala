@@ -1,9 +1,8 @@
-package v2.services
+package v2
+
 import com.google.inject.ImplementedBy
 import javax.inject.Inject
 import models.{DrivingLicence, Person, PersonWithLicence}
-import v2.connectors.DVLAConnector
-import v2.repositories.PersonRepository
 
 import scala.concurrent.{ExecutionContext, Future}
 

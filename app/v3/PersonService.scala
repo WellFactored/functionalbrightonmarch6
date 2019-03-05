@@ -1,10 +1,9 @@
-package v3.services
+package v3
+
 import cats.Monad
 import cats.implicits._
 import javax.inject.Inject
 import models.{DrivingLicence, Person, PersonWithLicence}
-import v3.connectors.DVLAConnector
-import v3.repositories.PersonRepository
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -12,21 +11,19 @@ trait PersonService[F[_]] {
   def getPerson(name: String): F[Option[PersonWithLicence]]
 }
 
-class PersonServiceImpl[F[_]] @Inject()(
+class PersonServiceImpl[F[_]: Monad] @Inject()(
   personRepository: PersonRepository[F],
   dvlaConnector:    DVLAConnector[F]
-)(
-  implicit F: Monad[F]
 ) extends PersonService[F] {
   def getPerson(name: String): F[Option[PersonWithLicence]] =
     for {
       person         <- personRepository.get(name)
-      drivingLicense <- person.map(getLicence).getOrElse(F.pure(None))
+      drivingLicense <- person.map(getLicence).getOrElse(Monad[F].pure(None))
     } yield person.map(PersonWithLicence(_, drivingLicense))
 
   private def getLicence(person: Person): F[Option[DrivingLicence]] =
     person.drivingLicenceNumber match {
-      case None           => F.pure(None)
+      case None           => Monad[F].pure(None)
       case Some(dlNumber) => dvlaConnector.getLicence(dlNumber)
     }
 }

@@ -1,5 +1,4 @@
-package v1.services
-
+package v1
 import org.scalatest.{Matchers, WordSpecLike}
 import org.scalatestplus.play.WsScalaTestClient
 import org.scalatestplus.play.guice.GuiceOneServerPerSuite

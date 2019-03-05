@@ -1,9 +1,8 @@
-package v2.services
+package v2
+
 import models.{DrivingLicence, Person}
 import org.scalatest.{Matchers, OptionValues, WordSpecLike}
 import play.api.test.{DefaultAwaitTimeout, FutureAwaits}
-import v2.connectors.DVLAConnector
-import v2.repositories.PersonRepository
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{ExecutionContext, Future}
