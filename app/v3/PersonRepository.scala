@@ -22,6 +22,9 @@ class FuturePersonRepository @Inject()(
   import dbConfig._
   import profile.api._
 
+  def get(name: String): Future[Option[Person]] =
+    db.run(people.filter(_.name === name).result.headOption)
+
   /**
     * Here we define the table. It will have a name of people
     */
@@ -44,19 +47,5 @@ class FuturePersonRepository @Inject()(
   /**
     * The starting point for all queries on the people table.
     */
-  private val people = TableQuery[PeopleTable]
-
-  def get(name: String): Future[Option[Person]] =
-    db.run(people.filter(_.name === name).result.headOption)
-
-  def create(name: String, age: Int, drivingLicenseNumber: Option[String]): Future[Person] =
-    db.run {
-      (people.map(p => (p.name, p.age, p.drivingLicenceNumber))
-        returning people.map(_.id)
-        into ((cols, id) => Person(id, cols._1, cols._2, cols._3))) += (name, age, drivingLicenseNumber)
-    }
-
-  def delete(id: Long): Future[Unit] =
-    db.run(people.filter(_.id === id).delete).map(_ => ())
-
+  private lazy val people = TableQuery[PeopleTable]
 }

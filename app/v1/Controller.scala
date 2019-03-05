@@ -1,4 +1,4 @@
-package v2
+package v1
 
 import javax.inject._
 import play.api.libs.json.Json
@@ -6,12 +6,12 @@ import play.api.mvc._
 
 import scala.concurrent.ExecutionContext
 
-class PersonController @Inject()(
-  service: PersonService,
-  cc:      MessagesControllerComponents
+class Controller @Inject()(
+  service:                           PersonService,
+  override val controllerComponents: ControllerComponents
 )(
   implicit ec: ExecutionContext
-) extends MessagesAbstractController(cc) {
+) extends BaseController {
 
   def getPerson(name: String): Action[AnyContent] = Action.async { implicit request =>
     service.getPerson(name).map {

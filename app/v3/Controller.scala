@@ -6,12 +6,12 @@ import play.api.mvc._
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class PersonController @Inject()(
-  service: PersonService[Future],
-  cc:      MessagesControllerComponents
+class Controller @Inject()(
+  service:                           PersonService[Future],
+  override val controllerComponents: ControllerComponents
 )(
   implicit ec: ExecutionContext
-) extends MessagesAbstractController(cc) {
+) extends BaseController {
 
   def getPerson(name: String): Action[AnyContent] = Action.async { implicit request =>
     service.getPerson(name).map {
